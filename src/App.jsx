@@ -274,8 +274,6 @@ export default function App() {
             <a
               key={id}
               href={id === "nosotros" ? "/nosotros" : `#${id}`}
-              target={id === "nosotros" ? "_blank" : undefined}
-              rel={id === "nosotros" ? "noopener noreferrer" : undefined}
               onClick={() => setMenu(false)}
             >
               {name}
@@ -458,8 +456,6 @@ export default function App() {
             <a
               key={id}
               href={id === "nosotros" ? "/nosotros" : `#${id}`}
-              target={id === "nosotros" ? "_blank" : undefined}
-              rel={id === "nosotros" ? "noopener noreferrer" : undefined}
             >
               {name}
             </a>
