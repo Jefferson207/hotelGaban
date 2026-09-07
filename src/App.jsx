@@ -238,10 +238,17 @@ function AboutSection({ standalone = false }) {
 
 export default function App() {
   const [menu, setMenu] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [slide, setSlide] = useState(0);
   const [bookingRoom, setBookingRoom] = useState(null);
   const [galleryImages, setGalleryImages] = useState(gallery);
   const openBooking = (room) => setBookingRoom(room || rooms[0].name);
+  useEffect(() => {
+    const updateHeader = () => setScrolled(window.scrollY > 24);
+    updateHeader();
+    window.addEventListener("scroll", updateHeader, { passive: true });
+    return () => window.removeEventListener("scroll", updateHeader);
+  }, []);
   const addImages = (e) => {
     const images = Array.from(e.target.files || [])
       .filter((file) => file.type.startsWith("image/"))
@@ -278,7 +285,7 @@ export default function App() {
   }
   return (
     <>
-      <header className="site-header">
+      <header className={`site-header${scrolled ? " is-scrolled" : ""}`}>
         <a className="brand" href="#inicio">
           <img src={hotelLogo} alt="Hotel Plaza San Gaban" />
         </a>

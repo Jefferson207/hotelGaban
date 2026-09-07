@@ -54,6 +54,11 @@ a {
   justify-content: space-between;
   padding: 12px clamp(20px, 5vw, 72px);
   color: white;
+  transition: background-color 260ms ease, box-shadow 260ms ease;
+}
+.site-header.is-scrolled {
+  background: #0c3025;
+  box-shadow: 0 4px 16px #0419104d;
 }
 .inner-header {
   position: fixed;
@@ -710,8 +715,6 @@ footer small {
     position: fixed;
     height: 82px;
     padding: 10px 20px;
-    background: #0c3025;
-    box-shadow: 0 4px 16px #0419104d;
   }
   .inner-header {
     height: 82px;
