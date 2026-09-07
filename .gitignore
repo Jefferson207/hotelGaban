@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.vite/
+
+# Archivos de la primera maqueta estática, reemplazada por src/ (React + Vite)
+/assets/
+/script.js
+/style.css
+/logo hotel.png
