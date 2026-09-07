@@ -239,7 +239,13 @@ export default function App() {
         </a>
         <nav className={menu ? "nav open" : "nav"}>
           {links.map(([name, id]) => (
-            <a key={id} href={`#${id}`} onClick={() => setMenu(false)}>
+            <a
+              key={id}
+              href={`#${id}`}
+              target={id === "nosotros" ? "_blank" : undefined}
+              rel={id === "nosotros" ? "noopener noreferrer" : undefined}
+              onClick={() => setMenu(false)}
+            >
               {name}
             </a>
           ))}
@@ -417,7 +423,12 @@ export default function App() {
         <div>
           <b>Explora</b>
           {links.map(([name, id]) => (
-            <a key={id} href={`#${id}`}>
+            <a
+              key={id}
+              href={`#${id}`}
+              target={id === "nosotros" ? "_blank" : undefined}
+              rel={id === "nosotros" ? "noopener noreferrer" : undefined}
+            >
               {name}
             </a>
           ))}
