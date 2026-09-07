@@ -273,6 +273,12 @@ export default function App() {
     window.addEventListener("scroll", updateHeader, { passive: true });
     return () => window.removeEventListener("scroll", updateHeader);
   }, []);
+  useEffect(() => {
+    const carousel = window.setInterval(() => {
+      setSlide((current) => (current + 1) % heroSlides.length);
+    }, 5500);
+    return () => window.clearInterval(carousel);
+  }, []);
   const addImages = (e) => {
     const images = Array.from(e.target.files || [])
       .filter((file) => file.type.startsWith("image/"))
@@ -345,7 +351,8 @@ export default function App() {
       <main>
         <section id="inicio" className="hero">
           <img
-            className="hero-image"
+            key={slide}
+            className="hero-image hero-fade"
             src={heroSlides[slide]}
             alt="Paisaje de San Gabán"
           />
