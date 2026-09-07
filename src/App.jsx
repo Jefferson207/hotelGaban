@@ -236,6 +236,30 @@ function AboutSection({ standalone = false }) {
   );
 }
 
+function SiteFooter() {
+  return (
+    <footer>
+      <div>
+        <img src={hotelLogo} alt="Hotel Plaza San Gaban" />
+        <p>Descansa rodeado de naturaleza en San Gabán, Puno.</p>
+      </div>
+      <div>
+        <b>Explora</b>
+        {links.map(([name, id]) => (
+          <a key={id} href={id === "inicio" ? "/" : id === "nosotros" ? "/nosotros" : `/#${id}`}>{name}</a>
+        ))}
+      </div>
+      <div>
+        <b>Contacto</b>
+        <span>{hotel.location}</span>
+        <span>{hotel.phone || "Teléfono por configurar"}</span>
+        <span>{hotel.email || "Correo por configurar"}</span>
+      </div>
+      <small>© {new Date().getFullYear()} Hotel Plaza San Gaban.</small>
+    </footer>
+  );
+}
+
 export default function App() {
   const [menu, setMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -279,6 +303,7 @@ export default function App() {
           </button>
         </header>
         <main className="about-page"><AboutSection standalone /></main>
+        <SiteFooter />
         <BookingModal room={bookingRoom} onClose={() => setBookingRoom(null)} />
       </>
     );
