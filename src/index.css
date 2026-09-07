@@ -791,6 +791,29 @@ a {
 .location-copy p {
   line-height: 1.8;
 }
+.location h2 {
+  max-width: 560px;
+  font-size: clamp(2.35rem, 3.8vw, 3.9rem);
+}
+.location-contact {
+  display: grid;
+  gap: 8px;
+  margin: 22px 0 25px;
+}
+.location-contact p {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  color: #ffffffcf;
+  font-size: 14px;
+  line-height: 1.45;
+}
+.location-contact b {
+  color: #e5ca89;
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
 .location iframe {
   width: 100%;
   min-width: 0;

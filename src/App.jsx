@@ -541,8 +541,11 @@ export default function App() {
           <div className="location-copy">
             <p className="kicker">UBICACIÓN</p>
             <h2>Encuéntranos en San Gabán</h2>
-            <p>{hotel.location}</p>
-            {(hotel.phone || hotel.email) && <p>{hotel.phone}{hotel.phone && hotel.email && <br />}{hotel.email}</p>}
+            <div className="location-contact">
+              <p><b>Dirección</b>{hotel.location}</p>
+              {hotel.phone && <p><b>Celular</b>{hotel.phone}</p>}
+              {hotel.email && <p><b>Correo</b>{hotel.email}</p>}
+            </div>
             <a
               className="secondary"
               href="https://www.google.com/maps/search/San+Gaban+Puno+Peru"
