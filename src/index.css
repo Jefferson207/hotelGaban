@@ -43,7 +43,7 @@ a {
   text-decoration: none;
 }
 .site-header {
-  position: absolute;
+  position: fixed;
   z-index: 10;
   top: 0;
   left: 0;
@@ -56,7 +56,10 @@ a {
   color: white;
 }
 .inner-header {
-  position: relative;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
   z-index: 10;
   display: flex;
   min-width: 0;
@@ -72,6 +75,7 @@ a {
 }
 .about-page {
   background: #f7f3eb;
+  padding-top: 104px;
 }
 .brand {
   display: block;
@@ -710,10 +714,6 @@ footer small {
     box-shadow: 0 4px 16px #0419104d;
   }
   .inner-header {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
     height: 82px;
     padding: 10px 20px;
     box-shadow: 0 4px 16px #0419104d;
