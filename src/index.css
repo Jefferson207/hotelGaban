@@ -4,6 +4,7 @@
 }
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 104px;
 }
 html,
 body,
@@ -23,6 +24,12 @@ button,
 input,
 select {
   font: inherit;
+}
+button,
+a,
+input,
+select {
+  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, opacity 180ms ease, transform 180ms ease;
 }
 button {
   cursor: pointer;
@@ -88,6 +95,15 @@ a {
   padding: 13px 20px;
   color: #17372c;
 }
+.primary:hover {
+  background: #f0d891;
+  box-shadow: 0 8px 20px #0000002b;
+  transform: translateY(-2px);
+}
+.secondary:hover {
+  background: #ffffff20;
+  transform: translateY(-2px);
+}
 .secondary {
   display: inline-flex;
   align-items: center;
@@ -117,6 +133,7 @@ a {
 .hero-image {
   object-fit: cover;
   object-position: center;
+  animation: hero-zoom 10s ease-out both;
 }
 .hero-overlay {
   background: linear-gradient(
@@ -204,6 +221,7 @@ a {
   width: 100%;
   min-width: 0;
   padding: 96px clamp(20px, 6vw, 92px);
+  animation: section-enter 650ms ease-out both;
 }
 .section h2,
 .location h2 {
@@ -236,6 +254,11 @@ a {
   min-height: 245px;
   padding: 24px;
   background: #e6ddca;
+  transition: transform 240ms ease, box-shadow 240ms ease;
+}
+.about-cards article:hover {
+  box-shadow: 0 16px 30px #17372c24;
+  transform: translateY(-5px);
 }
 .about-cards article:nth-child(2) {
   background: #dbe3d0;
@@ -276,6 +299,12 @@ a {
   min-width: 0;
   border: 1px solid #d8d0c3;
   background: #fbfaf7;
+  transition: transform 240ms ease, box-shadow 240ms ease, border-color 240ms ease;
+}
+.room-card:hover {
+  border-color: #bba56d;
+  box-shadow: 0 18px 35px #17372c1c;
+  transform: translateY(-6px);
 }
 .room-image {
   position: relative;
@@ -286,6 +315,10 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 500ms ease;
+}
+.room-card:hover .room-image img {
+  transform: scale(1.045);
 }
 .arrow {
   position: absolute;
@@ -415,6 +448,11 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 420ms ease, filter 420ms ease;
+}
+.gallery-grid img:hover {
+  filter: saturate(1.1);
+  transform: scale(1.025);
 }
 .gallery-grid img:first-child {
   grid-column: span 2;
@@ -428,6 +466,7 @@ a {
   padding: 96px clamp(20px, 6vw, 92px);
   background: #0c3025;
   color: white;
+  animation: section-enter 650ms ease-out both;
 }
 .location-copy {
   min-width: 0;
@@ -497,6 +536,7 @@ footer small {
   background: #fbfaf7;
   padding: 30px;
   color: #153c31;
+  animation: modal-enter 220ms ease-out both;
 }
 .modal-close {
   position: absolute;
@@ -559,6 +599,26 @@ footer small {
   background: #153c31;
   padding: 12px 20px;
   color: white;
+}
+@keyframes hero-zoom {
+  from { transform: scale(1.05); }
+  to { transform: scale(1); }
+}
+@keyframes section-enter {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes modal-enter {
+  from { opacity: 0; transform: translateY(12px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 @media (max-width: 767px) {
   .site-header {
