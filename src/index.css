@@ -397,8 +397,7 @@ a {
 .rooms > .rooms-grid,
 .experiences > .section-heading,
 .experiences > .gallery-grid,
-.location > *,
-footer > * {
+.location > * {
   width: min(100%, 1400px);
   margin-left: auto;
   margin-right: auto;
