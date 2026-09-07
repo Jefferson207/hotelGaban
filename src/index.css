@@ -703,18 +703,29 @@ footer small {
 }
 @media (max-width: 767px) {
   .site-header {
+    position: fixed;
     height: 82px;
     padding: 10px 20px;
+    background: #0c3025;
+    box-shadow: 0 4px 16px #0419104d;
   }
   .inner-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
     height: 82px;
     padding: 10px 20px;
+    box-shadow: 0 4px 16px #0419104d;
   }
   .inner-header .brand {
     width: 100px;
   }
   .about-page .about {
     min-height: calc(100svh - 82px);
+  }
+  .about-page {
+    padding-top: 82px;
   }
   .brand {
     width: 100px;
