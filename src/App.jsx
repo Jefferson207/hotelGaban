@@ -257,9 +257,22 @@ export default function App() {
           <a className="brand" href="/">
             <img src={hotelLogo} alt="Hotel Plaza San Gaban" />
           </a>
-          <a className="secondary" href="/">Inicio</a>
+          <nav className={menu ? "nav open" : "nav"}>
+            {links.map(([name, id]) => (
+              <a key={id} href={id === "inicio" ? "/" : id === "nosotros" ? "/nosotros" : `/#${id}`} onClick={() => setMenu(false)}>
+                {name}
+              </a>
+            ))}
+            <button className="primary nav-book" onClick={() => { setMenu(false); openBooking(); }}>
+              <CalendarDays size={16} /> Reservar
+            </button>
+          </nav>
+          <button className="menu-button" onClick={() => setMenu(!menu)} aria-label="Abrir menú">
+            {menu ? <X /> : <Menu />}
+          </button>
         </header>
         <main className="about-page"><AboutSection standalone /></main>
+        <BookingModal room={bookingRoom} onClose={() => setBookingRoom(null)} />
       </>
     );
   }
