@@ -1,2 +1,0 @@
-import { MessageCircle } from 'lucide-react';import { WHATSAPP_NUMBER } from '../data/hotelData'
-export default function WhatsAppButton(){const click=()=>{if(!WHATSAPP_NUMBER)return alert('Configura WHATSAPP_NUMBER en src/data/hotelData.js.');open(`https://wa.me/${WHATSAPP_NUMBER}`,'_blank')};return <button onClick={click} aria-label="Reservar por WhatsApp" style={{position:'fixed',right:'16px',bottom:'16px'}} className="z-30 grid h-14 w-14 place-items-center rounded-full bg-[#25d366] text-[#073a22] shadow-lg transition hover:scale-105"><MessageCircle size={26}/></button>}
