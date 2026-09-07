@@ -71,6 +71,9 @@ a {
 .about-page .about {
   min-height: calc(100svh - 104px);
 }
+.about-page {
+  background: #f7f3eb;
+}
 .brand {
   display: block;
   width: 130px;
@@ -301,6 +304,69 @@ a {
 }
 .about-cards article:nth-child(3) p {
   color: #ffffffb8;
+}
+.about-standalone {
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 28px 48px;
+  align-items: stretch;
+  padding-top: clamp(64px, 10vw, 130px);
+  padding-bottom: clamp(64px, 10vw, 130px);
+}
+.about-standalone .about-intro {
+  display: grid;
+  align-content: center;
+  padding: 30px 0;
+}
+.about-standalone .about-intro h2 {
+  max-width: 650px;
+  font-size: clamp(3.2rem, 6vw, 6.4rem);
+}
+.about-standalone .about-intro > p:not(.kicker) {
+  margin-top: 28px;
+  font-size: 17px;
+}
+.about-visual {
+  position: relative;
+  min-height: 410px;
+  overflow: hidden;
+  background: #153c31;
+}
+.about-visual::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(180deg, transparent 45%, #071f18cc);
+}
+.about-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 800ms ease;
+}
+.about-visual:hover img {
+  transform: scale(1.045);
+}
+.about-visual p {
+  position: absolute;
+  z-index: 1;
+  right: 24px;
+  bottom: 18px;
+  margin: 0;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.about-standalone .about-cards {
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 12px;
+}
+.about-standalone .about-cards article {
+  min-height: 270px;
+  padding: 32px;
 }
 .rooms {
   background: #f1ede4;
@@ -728,6 +794,29 @@ footer small {
   .about {
     grid-template-columns: 1fr;
     gap: 30px;
+  }
+  .about-standalone {
+    gap: 22px;
+    padding-top: 58px;
+    padding-bottom: 58px;
+  }
+  .about-standalone .about-intro {
+    padding: 0;
+  }
+  .about-standalone .about-intro h2 {
+    font-size: clamp(3rem, 13vw, 4.4rem);
+  }
+  .about-visual {
+    min-height: 300px;
+  }
+  .about-standalone .about-cards {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .about-standalone .about-cards article {
+    min-height: auto;
+    padding: 26px;
   }
   .about-cards {
     grid-template-columns: 1fr;

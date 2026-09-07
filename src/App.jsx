@@ -218,14 +218,15 @@ function RoomCard({ room, onBook }) {
     </article>
   );
 }
-function AboutSection() {
+function AboutSection({ standalone = false }) {
   return (
-    <section id="nosotros" className="section about">
+    <section id="nosotros" className={`section about${standalone ? " about-standalone" : ""}`}>
       <div className="about-intro">
         <p className="kicker">NOSOTROS</p>
         <h2>Hospitalidad que se siente como hogar</h2>
         <p>En Hotel Plaza San Gaban recibimos a cada viajero con calidez, tranquilidad y el encanto natural de nuestra tierra.</p>
       </div>
+      {standalone && <div className="about-visual"><img src={heroSlides[1]} alt="Naturaleza de San Gabán" /><p>San Gabán, Puno · Perú</p></div>}
       <div className="about-cards">
         <article><span>01</span><h3>Quiénes somos</h3><p>Somos un hotel local comprometido con brindarte una estadía cómoda, cercana y memorable en San Gabán.</p></article>
         <article><span>02</span><h3>Misión</h3><p>Ofrecer un descanso confiable y acogedor, con atención amable y espacios pensados para cada huésped.</p></article>
@@ -258,7 +259,7 @@ export default function App() {
           </a>
           <a className="secondary" href="/">Inicio</a>
         </header>
-        <main className="about-page"><AboutSection /></main>
+        <main className="about-page"><AboutSection standalone /></main>
       </>
     );
   }
@@ -341,7 +342,7 @@ export default function App() {
             ↓ EXPLORAR
           </a>
         </section>
-        <section id="nosotros" className="section about">
+        {false && <section id="nosotros" className="section about">
           <div className="about-intro">
             <p className="kicker">NOSOTROS</p>
             <h2>Hospitalidad que se siente como hogar</h2>
@@ -376,7 +377,7 @@ export default function App() {
               </p>
             </article>
           </div>
-        </section>
+        </section>}
         <section id="habitaciones" className="section rooms">
           <p className="kicker">HABITACIONES</p>
           <h2>
