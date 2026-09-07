@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CalendarDays, ChevronLeft, ChevronRight, Menu, X } from "lucide-react";
+import { Bath, BedDouble, CalendarDays, ChevronLeft, ChevronRight, Droplets, Menu, Monitor, Wifi, X } from "lucide-react";
 import {
   gallery,
   galleryAlt,
@@ -215,12 +215,70 @@ function RoomCard({ room, onBook }) {
         <button className="text-button" onClick={() => onBook(room.name)}>
           Reservar →
         </button>
-          <button className="room-view" onClick={() => next(1)}>
+          <a className="room-view" href={`/habitaciones/${room.slug}`}>
             Ver habitación
-          </button>
+          </a>
         </div>
       </div>
     </article>
+  );
+}
+
+function featureIcon(feature) {
+  const value = feature.toLowerCase();
+  if (value.includes("cama")) return BedDouble;
+  if (value.includes("baño")) return Bath;
+  if (value.includes("wifi")) return Wifi;
+  if (value.includes("agua")) return Droplets;
+  return Monitor;
+}
+
+function RoomDetail({ room, onBook }) {
+  const images = room.images || [room.image];
+  const [activeImage, setActiveImage] = useState(0);
+  const changeImage = (direction) => setActiveImage((current) => (current + direction + images.length) % images.length);
+
+  return (
+    <main className="room-detail-page">
+      <div className="room-detail-shell">
+        <nav className="breadcrumb" aria-label="Navegación">
+          <a href="/">Inicio</a><span>›</span><a href="/#habitaciones">Habitaciones</a><span>›</span><strong>{room.name}</strong>
+        </nav>
+        <div className="room-detail-grid">
+          <section className="detail-gallery" aria-label={`Galería de ${room.name}`}>
+            <div className="detail-main-image">
+              <img src={images[activeImage]} alt={`${room.name}, imagen ${activeImage + 1}`} />
+              {images.length > 1 && <>
+                <button className="detail-arrow detail-arrow-left" onClick={() => changeImage(-1)} aria-label="Imagen anterior"><ChevronLeft /></button>
+                <button className="detail-arrow detail-arrow-right" onClick={() => changeImage(1)} aria-label="Imagen siguiente"><ChevronRight /></button>
+              </>}
+              <span className="image-counter">{activeImage + 1} / {images.length}</span>
+            </div>
+            {images.length > 1 && <div className="detail-thumbnails">
+              {images.map((image, index) => <button key={image} className={index === activeImage ? "active" : ""} onClick={() => setActiveImage(index)} aria-label={`Ver imagen ${index + 1}`}><img src={image} alt="" /></button>)}
+            </div>}
+          </section>
+          <section className="detail-info">
+            <p className="kicker">HABITACIÓN</p>
+            <h1>{room.name}</h1>
+            <p className="detail-description">{room.description}</p>
+            <div className="detail-features">
+              {room.features.map((feature) => {
+                const Icon = featureIcon(feature);
+                return <div key={feature}><Icon size={24} strokeWidth={1.8} /><span>{feature}</span></div>;
+              })}
+            </div>
+          </section>
+          <aside className="detail-booking">
+            <span>Desde</span>
+            <strong>{room.price}</strong>
+            <small>/ noche</small>
+            <button className="detail-reserve" onClick={() => onBook(room.name)}><CalendarDays size={18} /> Reservar ahora</button>
+            <button className="detail-consult" onClick={() => onBook(room.name)}>Consultar disponibilidad</button>
+          </aside>
+        </div>
+      </div>
+    </main>
   );
 }
 function AboutSection({ standalone = false }) {
@@ -284,7 +342,27 @@ export default function App() {
     }, 5500);
     return () => window.clearInterval(carousel);
   }, []);
-  const isAboutPage = window.location.pathname.replace(/\/$/, "") === "/nosotros";
+  const pathname = window.location.pathname.replace(/\/$/, "");
+  const isAboutPage = pathname === "/nosotros";
+  const roomSlug = pathname.match(/^\/habitaciones\/([a-z-]+)$/)?.[1];
+  const detailRoom = rooms.find((room) => room.slug === roomSlug);
+  if (detailRoom) {
+    return (
+      <>
+        <header className="inner-header">
+          <a className="brand" href="/"><img src={hotelLogo} alt="Hotel Plaza San Gaban" /></a>
+          <nav className={menu ? "nav open" : "nav"}>
+            {links.map(([name, id]) => <a key={id} href={id === "inicio" ? "/" : id === "nosotros" ? "/nosotros" : `/#${id}`} onClick={() => setMenu(false)}>{name}</a>)}
+            <button className="primary nav-book" onClick={() => { setMenu(false); openBooking(); }}><CalendarDays size={16} /> Reservar</button>
+          </nav>
+          <button className="menu-button" onClick={() => setMenu(!menu)} aria-label="Abrir menú">{menu ? <X /> : <Menu />}</button>
+        </header>
+        <RoomDetail room={detailRoom} onBook={openBooking} />
+        <SiteFooter />
+        <BookingModal room={bookingRoom} onClose={() => setBookingRoom(null)} />
+      </>
+    );
+  }
   if (isAboutPage) {
     return (
       <>
