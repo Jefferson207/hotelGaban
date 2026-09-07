@@ -211,9 +211,14 @@ function RoomCard({ room, onBook }) {
             <li key={feature}>{feature}</li>
           ))}
         </ul>
+        <div className="room-actions">
         <button className="text-button" onClick={() => onBook(room.name)}>
           Reservar →
         </button>
+          <button className="room-view" onClick={() => next(1)}>
+            Ver habitación
+          </button>
+        </div>
       </div>
     </article>
   );
@@ -252,8 +257,8 @@ function SiteFooter() {
       <div>
         <b>Contacto</b>
         <span>{hotel.location}</span>
-        <span>{hotel.phone || "Teléfono por configurar"}</span>
-        <span>{hotel.email || "Correo por configurar"}</span>
+        {hotel.phone && <span>{hotel.phone}</span>}
+        {hotel.email && <span>{hotel.email}</span>}
       </div>
       <small>© {new Date().getFullYear()} Hotel Plaza San Gaban.</small>
     </footer>
@@ -265,7 +270,7 @@ export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [slide, setSlide] = useState(0);
   const [bookingRoom, setBookingRoom] = useState(null);
-  const [galleryImages, setGalleryImages] = useState(gallery);
+  const galleryImages = gallery;
   const openBooking = (room) => setBookingRoom(room || rooms[0].name);
   useEffect(() => {
     const updateHeader = () => setScrolled(window.scrollY > 24);
@@ -279,13 +284,6 @@ export default function App() {
     }, 5500);
     return () => window.clearInterval(carousel);
   }, []);
-  const addImages = (e) => {
-    const images = Array.from(e.target.files || [])
-      .filter((file) => file.type.startsWith("image/"))
-      .map((file) => URL.createObjectURL(file));
-    setGalleryImages((current) => [...current, ...images]);
-    e.target.value = "";
-  };
   const isAboutPage = window.location.pathname.replace(/\/$/, "") === "/nosotros";
   if (isAboutPage) {
     return (
@@ -450,15 +448,6 @@ export default function App() {
               <p className="kicker">EXPERIENCIAS</p>
               <h2>Momentos para recordar</h2>
             </div>
-            <label className="upload">
-              + Agregar fotos
-              <input
-                type="file"
-                accept="image/*"
-                multiple
-                onChange={addImages}
-              />
-            </label>
           </div>
           <div className="gallery-grid">
             {galleryImages.map((image, index) => (
@@ -476,11 +465,7 @@ export default function App() {
             <p className="kicker">UBICACIÓN</p>
             <h2>Encuéntranos en San Gabán</h2>
             <p>{hotel.location}</p>
-            <p>
-              {hotel.phone || "Teléfono por configurar"}
-              <br />
-              {hotel.email || "Correo por configurar"}
-            </p>
+            {(hotel.phone || hotel.email) && <p>{hotel.phone}{hotel.phone && hotel.email && <br />}{hotel.email}</p>}
             <a
               className="secondary"
               href="https://www.google.com/maps/search/San+Gaban+Puno+Peru"
@@ -516,8 +501,8 @@ export default function App() {
         <div>
           <b>Contacto</b>
           <span>{hotel.location}</span>
-          <span>{hotel.phone || "Teléfono por configurar"}</span>
-          <span>{hotel.email || "Correo por configurar"}</span>
+          {hotel.phone && <span>{hotel.phone}</span>}
+          {hotel.email && <span>{hotel.email}</span>}
         </div>
         <small>© {new Date().getFullYear()} Hotel Plaza San Gaban.</small>
       </footer>
