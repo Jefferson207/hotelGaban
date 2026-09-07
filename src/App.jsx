@@ -218,6 +218,23 @@ function RoomCard({ room, onBook }) {
     </article>
   );
 }
+function AboutSection() {
+  return (
+    <section id="nosotros" className="section about">
+      <div className="about-intro">
+        <p className="kicker">NOSOTROS</p>
+        <h2>Hospitalidad que se siente como hogar</h2>
+        <p>En Hotel Plaza San Gaban recibimos a cada viajero con calidez, tranquilidad y el encanto natural de nuestra tierra.</p>
+      </div>
+      <div className="about-cards">
+        <article><span>01</span><h3>Quiénes somos</h3><p>Somos un hotel local comprometido con brindarte una estadía cómoda, cercana y memorable en San Gabán.</p></article>
+        <article><span>02</span><h3>Misión</h3><p>Ofrecer un descanso confiable y acogedor, con atención amable y espacios pensados para cada huésped.</p></article>
+        <article><span>03</span><h3>Visión</h3><p>Ser el hotel referente de San Gabán para quienes buscan comodidad, servicio y conexión con la naturaleza.</p></article>
+      </div>
+    </section>
+  );
+}
+
 export default function App() {
   const [menu, setMenu] = useState(false);
   const [slide, setSlide] = useState(0);
@@ -231,6 +248,20 @@ export default function App() {
     setGalleryImages((current) => [...current, ...images]);
     e.target.value = "";
   };
+  const isAboutPage = window.location.pathname.replace(/\/$/, "") === "/nosotros";
+  if (isAboutPage) {
+    return (
+      <>
+        <header className="inner-header">
+          <a className="brand" href="/">
+            <img src={hotelLogo} alt="Hotel Plaza San Gaban" />
+          </a>
+          <a className="secondary" href="/">Inicio</a>
+        </header>
+        <main className="about-page"><AboutSection /></main>
+      </>
+    );
+  }
   return (
     <>
       <header className="site-header">
@@ -241,7 +272,7 @@ export default function App() {
           {links.map(([name, id]) => (
             <a
               key={id}
-              href={`#${id}`}
+              href={id === "nosotros" ? "/nosotros" : `#${id}`}
               target={id === "nosotros" ? "_blank" : undefined}
               rel={id === "nosotros" ? "noopener noreferrer" : undefined}
               onClick={() => setMenu(false)}
@@ -425,7 +456,7 @@ export default function App() {
           {links.map(([name, id]) => (
             <a
               key={id}
-              href={`#${id}`}
+              href={id === "nosotros" ? "/nosotros" : `#${id}`}
               target={id === "nosotros" ? "_blank" : undefined}
               rel={id === "nosotros" ? "noopener noreferrer" : undefined}
             >

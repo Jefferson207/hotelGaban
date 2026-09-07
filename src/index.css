@@ -55,6 +55,22 @@ a {
   padding: 12px clamp(20px, 5vw, 72px);
   color: white;
 }
+.inner-header {
+  display: flex;
+  min-width: 0;
+  height: 104px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px clamp(20px, 5vw, 72px);
+  background: #0c3025;
+  color: white;
+}
+.inner-header .secondary:hover {
+  background: #ffffff20;
+}
+.about-page .about {
+  min-height: calc(100svh - 104px);
+}
 .brand {
   display: block;
   width: 130px;
@@ -624,6 +640,16 @@ footer small {
   .site-header {
     height: 82px;
     padding: 10px 20px;
+  }
+  .inner-header {
+    height: 82px;
+    padding: 10px 20px;
+  }
+  .inner-header .brand {
+    width: 100px;
+  }
+  .about-page .about {
+    min-height: calc(100svh - 82px);
   }
   .brand {
     width: 100px;
