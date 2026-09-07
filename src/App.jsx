@@ -11,6 +11,7 @@ import hotelLogo from "./assets/logo/hotel.png";
 
 const links = [
   ["Inicio", "inicio"],
+  ["Nosotros", "nosotros"],
   ["Habitaciones", "habitaciones"],
   ["Experiencias", "experiencias"],
   ["Ubicación", "ubicacion"],
@@ -302,6 +303,42 @@ export default function App() {
           <a className="explore" href="#habitaciones">
             ↓ EXPLORAR
           </a>
+        </section>
+        <section id="nosotros" className="section about">
+          <div className="about-intro">
+            <p className="kicker">NOSOTROS</p>
+            <h2>Hospitalidad que se siente como hogar</h2>
+            <p>
+              En Hotel Plaza San Gaban recibimos a cada viajero con calidez,
+              tranquilidad y el encanto natural de nuestra tierra.
+            </p>
+          </div>
+          <div className="about-cards">
+            <article>
+              <span>01</span>
+              <h3>Quiénes somos</h3>
+              <p>
+                Somos un hotel local comprometido con brindarte una estadía
+                cómoda, cercana y memorable en San Gabán.
+              </p>
+            </article>
+            <article>
+              <span>02</span>
+              <h3>Misión</h3>
+              <p>
+                Ofrecer un descanso confiable y acogedor, con atención amable
+                y espacios pensados para cada huésped.
+              </p>
+            </article>
+            <article>
+              <span>03</span>
+              <h3>Visión</h3>
+              <p>
+                Ser el hotel referente de San Gabán para quienes buscan
+                comodidad, servicio y conexión con la naturaleza.
+              </p>
+            </article>
+          </div>
         </section>
         <section id="habitaciones" className="section rooms">
           <p className="kicker">HABITACIONES</p>

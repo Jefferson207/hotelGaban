@@ -42,7 +42,7 @@ a {
   left: 0;
   display: flex;
   width: 100%;
-  height: 88px;
+  height: 104px;
   align-items: center;
   justify-content: space-between;
   padding: 12px clamp(20px, 5vw, 72px);
@@ -50,7 +50,7 @@ a {
 }
 .brand {
   display: block;
-  width: 88px;
+  width: 130px;
   flex: none;
 }
 .brand img {
@@ -213,6 +213,55 @@ a {
   max-width: 500px;
   color: #5d7067;
   line-height: 1.7;
+}
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
+  gap: 60px;
+  align-items: end;
+  background: #faf8f4;
+}
+.about-intro > p:not(.kicker) {
+  max-width: 480px;
+  color: #5d7067;
+  line-height: 1.75;
+}
+.about-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.about-cards article {
+  min-width: 0;
+  min-height: 245px;
+  padding: 24px;
+  background: #e6ddca;
+}
+.about-cards article:nth-child(2) {
+  background: #dbe3d0;
+}
+.about-cards article:nth-child(3) {
+  background: #153c31;
+  color: white;
+}
+.about-cards span {
+  color: #a38a50;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+.about-cards h3 {
+  margin: 46px 0 10px;
+  font-family: 'Playfair Display', serif;
+  font-size: 25px;
+}
+.about-cards p {
+  color: #4f6259;
+  font-size: 14px;
+  line-height: 1.65;
+}
+.about-cards article:nth-child(3) p {
+  color: #ffffffb8;
 }
 .rooms {
   background: #f1ede4;
@@ -513,11 +562,11 @@ footer small {
 }
 @media (max-width: 767px) {
   .site-header {
-    height: 72px;
+    height: 82px;
     padding: 10px 20px;
   }
   .brand {
-    width: 74px;
+    width: 100px;
   }
   .menu-button {
     display: grid;
@@ -530,7 +579,7 @@ footer small {
   }
   .nav {
     position: absolute;
-    top: 72px;
+    top: 82px;
     right: 0;
     left: 0;
     display: none;
@@ -589,6 +638,20 @@ footer small {
   }
   .section {
     padding: 68px 20px;
+  }
+  .about {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .about-cards {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .about-cards article {
+    min-height: auto;
+  }
+  .about-cards h3 {
+    margin-top: 24px;
   }
   .section-heading {
     align-items: start;
