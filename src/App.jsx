@@ -274,7 +274,6 @@ function RoomDetail({ room, onBook }) {
             <strong>{room.price}</strong>
             <small>/ noche</small>
             <button className="detail-reserve" onClick={() => onBook(room.name)}><CalendarDays size={18} /> Reservar ahora</button>
-            <button className="detail-consult" onClick={() => onBook(room.name)}>Consultar disponibilidad</button>
           </aside>
         </div>
       </div>
