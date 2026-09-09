@@ -1,4 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,600;1,700&display=swap");
+.floating-whatsapp { position: fixed; z-index: 20; right: 24px; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); width: 60px; height: 60px; display: grid; place-items: center; border: 2px solid #ffffffd9; border-radius: 50%; background: #128c48; color: #fff; box-shadow: 0 5px 22px #071f1838; }
+.floating-whatsapp:hover { background: #0c7038; transform: translateY(-3px); }
+.floating-socials { position: fixed; z-index: 20; left: 16px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 6px 6px; border: 1px solid #ddc98980; border-radius: 24px; background: #10372aea; color: #fff; box-shadow: 0 5px 22px #071f1826; }
+.floating-socials-label { font-size: 8px; letter-spacing: .13em; color: #e1c477; margin-bottom: 3px; }
+.floating-socials a, .social-pending { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; }
+.floating-socials a:hover { background: #ffffff20; color: #e1c477; }
+.social-pending { opacity: .5; cursor: default; }
+.floating-whatsapp:focus-visible, .floating-socials a:focus-visible { outline: 3px solid #e1c477; outline-offset: 4px; }
+@media (max-width: 767px) {
+  .floating-whatsapp { right: 14px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); width: 54px; height: 54px; }
+  .floating-socials { left: 10px; padding: 8px 3px 4px; }
+  .floating-socials a, .social-pending { width: 30px; height: 30px; }
+}
 * {
   box-sizing: border-box;
 }

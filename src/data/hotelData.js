@@ -7,7 +7,7 @@ import photoTwo from '../assets/images/foto2.png'
 import photoThree from '../assets/images/foto3.png'
 
 export const WHATSAPP_NUMBER = '51950066814'
-export const hotel = { name: 'Hotel Plaza San Gaban', location: 'Carr. Interoceánica 102, Lanlacuni Bajo 21275', phone: '+51 950 066 814', email: '', socials: { facebook: '', instagram: '', tiktok: '' }, hero, room }
+export const hotel = { name: 'Hotel Plaza San Gaban', location: 'Carr. Interoceánica 102, Lanlacuni Bajo 21275', phone: '+51 950 066 814', email: '', socials: { facebook: 'https://www.facebook.com/p/Hotel-Plaza-San-Gaban-100064230064816/?locale=es_LA', instagram: '', tiktok: '' }, hero, room }
 export const heroSlides = [hero, heroAlternate]
 export const rooms = [
   { slug:'simple', name:'Habitación Simple', price:'S/ 120', description:'Un espacio sereno para descansar a tu ritmo.', image:room, images:[room,'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1000&q=85','https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1000&q=85'], features:['1 cama','Baño privado','TV','WiFi','Agua caliente'] },
