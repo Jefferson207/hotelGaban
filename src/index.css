@@ -4,7 +4,7 @@
 }
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 104px;
+  scroll-padding-top: 164px;
 }
 html,
 body,
@@ -49,16 +49,32 @@ a {
   left: 0;
   display: flex;
   width: 100%;
-  height: 104px;
+  height: 164px;
   align-items: center;
   justify-content: space-between;
   padding: 12px clamp(20px, 5vw, 72px);
   color: white;
-  transition: background-color 260ms ease, box-shadow 260ms ease;
+  transition: height 260ms ease, padding 260ms ease;
 }
-.site-header.is-scrolled {
-  background: #0c3025;
-  box-shadow: 0 4px 16px #0419104d;
+.site-header.is-scrolled,
+.inner-header.is-scrolled {
+  top: 16px;
+  left: 20px;
+  right: 20px;
+  width: calc(100% - 40px);
+  height: 88px;
+  padding: 4px clamp(20px, 4vw, 64px);
+  border: 1px solid rgb(225 214 164 / 65%);
+  border-radius: 19px;
+  background: linear-gradient(110deg, rgb(39 76 51 / 76%), rgb(12 44 32 / 84%));
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 8px 28px rgb(7 31 24 / 22%), inset 0 1px 0 #ffffff20;
+  color: #fff;
+}
+.site-header.is-scrolled .brand,
+.inner-header.is-scrolled .brand {
+  width: 120px;
 }
 .inner-header {
   position: fixed;
@@ -68,24 +84,31 @@ a {
   z-index: 10;
   display: flex;
   min-width: 0;
-  height: 104px;
+  height: 164px;
   align-items: center;
   justify-content: space-between;
   padding: 12px clamp(20px, 5vw, 72px);
-  background: #0c3025;
+  background-color: #0c3025;
+  background-image:
+    linear-gradient(rgb(12 48 37 / 70%), rgb(12 48 37 / 70%)),
+    url("../portada_paisaje.png");
+  background-position: center;
+  background-size: cover;
+  backdrop-filter: blur(8px);
   color: white;
 }
 .about-page .about {
-  min-height: calc(100svh - 104px);
+  min-height: calc(100svh - 164px);
 }
 .about-page {
   background: #f7f3eb;
-  padding-top: 104px;
+  padding-top: 164px;
 }
 .brand {
   display: block;
-  width: 130px;
+  width: 208px;
   flex: none;
+  transition: width 260ms ease;
 }
 .brand img {
   width: 100%;
@@ -386,8 +409,83 @@ a {
   min-height: 270px;
   padding: 32px;
 }
+.about-page .about-standalone {
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.55fr);
+  gap: 26px 48px;
+  padding: 36px clamp(24px, 4vw, 72px) 24px;
+  background: #faf8f4;
+}
+.about-page .about-intro { padding: 8px 0 8px 24px; }
+.about-page .about-intro .kicker { color: #a4772c; letter-spacing: .3em; }
+.about-page .about-intro h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(42px, 5.1vw, 86px);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -.045em;
+  text-transform: none;
+  margin: 16px 0 0;
+  color: #092c22;
+}
+.about-page .about-intro > p:not(.kicker) {
+  margin-top: 24px;
+  font-size: clamp(16px, 1.2vw, 20px);
+  line-height: 1.45;
+  color: #485452;
+}
+.about-page .about-visual {
+  min-height: 0;
+  aspect-ratio: 1.9;
+  border-radius: 18px;
+  align-self: center;
+  box-shadow: 0 12px 30px #163b2510;
+}
+.about-page .about-visual::after { background: linear-gradient(180deg, transparent 75%, #071f1840); }
+.about-page .about-cards { gap: 22px; margin-top: 0; }
+.about-page .about-cards article {
+  position: relative;
+  min-height: 138px;
+  border-radius: 12px;
+  padding: 32px 22px 22px 110px;
+  background: #eee9dd;
+}
+.about-page .about-cards article:nth-child(2) { background: #dfe5d3; }
+.about-page .about-cards article:nth-child(3) { background: #153c31; }
+.about-page .about-cards article > span { position: absolute; top: 16px; left: 26px; }
+.about-card-icon {
+  position: absolute;
+  left: 26px;
+  top: 40px;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #dcd1b5;
+  color: #12392a;
+  font-size: 42px;
+}
+.about-cards article:nth-child(2) .about-card-icon { background: #c3cfad; }
+.about-cards article:nth-child(3) .about-card-icon { background: #365940; color: #d5dfb0; }
+.about-page .about-cards h3 {
+  margin: 0 0 6px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 22px;
+  text-transform: none;
+  letter-spacing: -.025em;
+}
+.about-page .about-cards p { margin: 0; line-height: 1.45; }
+.about-signature { grid-column: 1 / -1; text-align: center; color: #a4772c; font-size: 11px; letter-spacing: .45em; }
+.about-signature small { display: block; margin-top: 8px; font-size: 9px; }
+@media (max-width: 900px) {
+  .about-page .about-standalone { grid-template-columns: 1fr; padding: 28px 20px; }
+  .about-page .about-intro { padding: 0; }
+  .about-page .about-intro h2 { font-size: clamp(42px, 9vw, 68px); }
+  .about-page .about-cards { grid-template-columns: 1fr; }
+  .about-page .about-visual { width: 100%; aspect-ratio: 1.5; }
+}
 .rooms {
-  background: #f1ede4;
+  background: radial-gradient(ellipse at top right, #e5ebdb80, transparent 45%), #faf8f3;
   padding-top: 78px;
   padding-bottom: 78px;
 }
@@ -527,10 +625,27 @@ a {
   font-size: 12px;
 }
 .room-body li::before {
-  content: "•";
-  margin-right: 6px;
-  color: #a48c55;
+  content: none;
 }
+.room-body li { display: flex; align-items: center; gap: 12px; }
+.room-body li svg { flex: none; color: #153c31; }
+.rooms > .kicker { color: #a4772c; letter-spacing: .25em; }
+.rooms > h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(32px, 3.8vw, 56px);
+  line-height: 1.03;
+  letter-spacing: -.035em;
+  text-transform: uppercase;
+}
+.rooms .room-card { border-radius: 12px; border-color: #e5dfd3; background: #fffefa; box-shadow: 0 10px 26px #17372c0a; }
+.rooms .room-title h3 { font-family: "Playfair Display", Georgia, serif; font-size: clamp(17px, 1.45vw, 22px); text-transform: none; letter-spacing: -.025em; }
+.rooms .room-title > span { border-left: 1px solid #ddd5c8; padding-left: 15px; }
+.rooms .room-title b { font-family: "Playfair Display", Georgia, serif; font-size: 24px; }
+.rooms .room-body { padding: 20px; }
+.rooms .room-body > p { font-size: 13px; }
+.rooms .room-body ul { margin-top: 12px; gap: 12px 18px; }
+.rooms .room-actions .text-button { gap: 10px; border-color: #e1c477; background: #e1c477; min-height: 46px; }
+.rooms .room-actions .room-view { min-height: 46px; }
 .text-button {
   display: inline-flex;
   align-items: center;
@@ -577,7 +692,7 @@ a {
 }
 .room-detail-page {
   min-width: 0;
-  padding: 142px clamp(20px, 4vw, 64px) 76px;
+  padding: 190px clamp(20px, 4vw, 64px) 76px;
   background: #f7f3eb;
 }
 .room-detail-shell {
@@ -758,22 +873,24 @@ a {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-auto-rows: 200px;
-  gap: 10px;
+  gap: 12px;
   margin-top: 30px;
 }
 .gallery-grid img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 420ms ease, filter 420ms ease;
+  transition: transform 420ms ease;
 }
 .gallery-grid img:hover {
-  filter: saturate(1.1);
-  transform: scale(1.025);
+  transform: scale(1.012);
 }
 .gallery-grid img:first-child {
   grid-column: span 2;
   grid-row: span 2;
+}
+.gallery-grid img:nth-child(4) {
+  grid-column: span 2;
 }
 .location {
   display: grid;
@@ -967,25 +1084,39 @@ footer small {
 @media (max-width: 767px) {
   .site-header {
     position: fixed;
-    height: 82px;
+    height: 108px;
     padding: 10px 20px;
   }
   .inner-header {
-    height: 82px;
+    height: 108px;
     padding: 10px 20px;
     box-shadow: 0 4px 16px #0419104d;
   }
   .inner-header .brand {
-    width: 100px;
+    width: 130px;
   }
   .about-page .about {
-    min-height: calc(100svh - 82px);
+    min-height: calc(100svh - 108px);
   }
   .about-page {
-    padding-top: 82px;
+    padding-top: 108px;
   }
   .brand {
-    width: 100px;
+    width: 130px;
+  }
+  .site-header.is-scrolled,
+  .inner-header.is-scrolled {
+    top: 10px;
+    left: 12px;
+    right: 12px;
+    width: calc(100% - 24px);
+    height: 76px;
+    padding: 4px 16px;
+    border-radius: 16px;
+  }
+  .site-header.is-scrolled .brand,
+  .inner-header.is-scrolled .brand {
+    width: 98px;
   }
   .menu-button {
     display: grid;
@@ -998,7 +1129,7 @@ footer small {
   }
   .nav {
     position: absolute;
-    top: 82px;
+    top: 108px;
     right: 0;
     left: 0;
     display: none;
@@ -1008,6 +1139,12 @@ footer small {
     padding: 12px 20px 20px;
     background: #0c3025;
     box-shadow: 0 12px 22px #0004;
+  }
+  .site-header.is-scrolled .nav,
+  .inner-header.is-scrolled .nav {
+    top: calc(100% + 8px);
+    border-radius: 16px;
+    color: white;
   }
   .nav.open {
     display: flex;
@@ -1111,7 +1248,7 @@ footer small {
     gap: 7px;
   }
   .room-detail-page {
-    padding: 106px 20px 52px;
+    padding: 132px 20px 52px;
   }
   .breadcrumb {
     margin-bottom: 17px;

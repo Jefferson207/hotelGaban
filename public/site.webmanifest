@@ -1,0 +1,16 @@
+{
+  "name": "Hotel Plaza San Gaban",
+  "short_name": "Hotel Plaza",
+  "description": "Hospedaje en San Gabán, Puno, Perú.",
+  "lang": "es-PE",
+  "theme_color": "#0c3025",
+  "background_color": "#f5f1e8",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/logo_seo.png",
+      "sizes": "1254x1254",
+      "type": "image/png"
+    }
+  ]
+}

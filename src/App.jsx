@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Bath, BedDouble, CalendarDays, ChevronLeft, ChevronRight, Droplets, Menu, Monitor, Wifi, X } from "lucide-react";
+import { Bath, BedDouble, CalendarDays, ChevronLeft, ChevronRight, Droplets, MapPin, Menu, Monitor, Wifi, X } from "lucide-react";
 import {
   gallery,
   galleryAlt,
   heroSlides,
   hotel,
   rooms,
+  WHATSAPP_NUMBER,
 } from "./data/hotelData";
 import hotelLogo from "./assets/logo/hotel.png";
 
@@ -72,6 +73,12 @@ function BookingModal({ room, onClose }) {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                const message = `Hola, quiero reservar en Hotel Plaza San Gaban.\n\nNombre: ${form.name}\nIngreso: ${form.checkIn}\nSalida: ${form.checkOut}\nHuéspedes: ${form.guests}\nHabitación: ${form.room}\nTeléfono: ${form.phone}`;
+                window.open(
+                  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,
+                  "_blank",
+                  "noopener,noreferrer",
+                );
                 setSent(true);
               }}
             >
@@ -207,13 +214,14 @@ function RoomCard({ room, onBook }) {
         </div>
         <p>{room.description}</p>
         <ul>
-          {room.features.map((feature) => (
-            <li key={feature}>{feature}</li>
-          ))}
+          {room.features.map((feature) => {
+            const Icon = featureIcon(feature);
+            return <li key={feature}><Icon size={17} strokeWidth={1.7} aria-hidden="true" /><span>{feature}</span></li>;
+          })}
         </ul>
         <div className="room-actions">
         <button className="text-button" onClick={() => onBook(room.name)}>
-          Reservar →
+          <CalendarDays size={17} aria-hidden="true" /> Reservar <span aria-hidden="true">→</span>
         </button>
           <a className="room-view" href={`/habitaciones/${room.slug}`}>
             Ver habitación
@@ -286,14 +294,15 @@ function AboutSection({ standalone = false }) {
       <div className="about-intro">
         <p className="kicker">NOSOTROS</p>
         <h2>Hospitalidad que se siente como hogar</h2>
-        <p>En Hotel Plaza San Gaban recibimos a cada viajero con calidez, tranquilidad y el encanto natural de nuestra tierra.</p>
+        <p>En Hotel Plaza San Gaban te recibimos con comodidad, tranquilidad y la calidez de nuestra tierra. Un espacio pensado para descansar y disfrutar de la naturaleza de San Gabán.</p>
       </div>
       {standalone && <div className="about-visual"><img src={heroSlides[1]} alt="Naturaleza de San Gabán" /><p>San Gabán, Puno · Perú</p></div>}
       <div className="about-cards">
-        <article><span>01</span><h3>Quiénes somos</h3><p>Somos un hotel local comprometido con brindarte una estadía cómoda, cercana y memorable en San Gabán.</p></article>
-        <article><span>02</span><h3>Misión</h3><p>Ofrecer un descanso confiable y acogedor, con atención amable y espacios pensados para cada huésped.</p></article>
-        <article><span>03</span><h3>Visión</h3><p>Ser el hotel referente de San Gabán para quienes buscan comodidad, servicio y conexión con la naturaleza.</p></article>
+        <article><span>01</span><div className="about-card-icon"><BedDouble size={30} /></div><h3>Descanso</h3><p>Habitaciones cómodas y acogedoras para un verdadero descanso.</p></article>
+        <article><span>02</span><div className="about-card-icon">❧</div><h3>Naturaleza</h3><p>Rodeados de la belleza única de la selva de San Gabán.</p></article>
+        <article><span>03</span><div className="about-card-icon"><MapPin size={30} /></div><h3>Ubicación privilegiada</h3><p>En el corazón de San Gabán, con fácil acceso a los principales atractivos.</p></article>
       </div>
+      {standalone && <div className="about-signature">HOTEL PLAZA SAN GABAN<small>PUNO · PERÚ</small></div>}
     </section>
   );
 }
@@ -314,7 +323,7 @@ function SiteFooter() {
       <div>
         <b>Contacto</b>
         <span>{hotel.location}</span>
-        {hotel.phone && <span>{hotel.phone}</span>}
+        {hotel.phone && <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer">WhatsApp: {hotel.phone}</a>}
         {hotel.email && <span>{hotel.email}</span>}
       </div>
       <small>© {new Date().getFullYear()} Hotel Plaza San Gaban.</small>
@@ -348,7 +357,7 @@ export default function App() {
   if (detailRoom) {
     return (
       <>
-        <header className="inner-header">
+        <header className={`inner-header${scrolled ? " is-scrolled" : ""}`}>
           <a className="brand" href="/"><img src={hotelLogo} alt="Hotel Plaza San Gaban" /></a>
           <nav className={menu ? "nav open" : "nav"}>
             {links.map(([name, id]) => <a key={id} href={id === "inicio" ? "/" : id === "nosotros" ? "/nosotros" : `/#${id}`} onClick={() => setMenu(false)}>{name}</a>)}
@@ -365,7 +374,7 @@ export default function App() {
   if (isAboutPage) {
     return (
       <>
-        <header className="inner-header">
+        <header className={`inner-header${scrolled ? " is-scrolled" : ""}`}>
           <a className="brand" href="/">
             <img src={hotelLogo} alt="Hotel Plaza San Gaban" />
           </a>
@@ -543,12 +552,12 @@ export default function App() {
             <h2>Encuéntranos en San Gabán</h2>
             <div className="location-contact">
               <p><b>Dirección</b>{hotel.location}</p>
-              {hotel.phone && <p><b>Celular</b>{hotel.phone}</p>}
+              {hotel.phone && <p><b>WhatsApp</b><a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer">{hotel.phone}</a></p>}
               {hotel.email && <p><b>Correo</b>{hotel.email}</p>}
             </div>
             <a
               className="secondary"
-              href="https://www.google.com/maps/search/San+Gaban+Puno+Peru"
+              href="https://www.google.com/maps/search/?api=1&query=Carr.+Interoce%C3%A1nica+102%2C+Lanlacuni+Bajo+21275%2C+Per%C3%BA"
               target="_blank"
               rel="noreferrer"
             >
@@ -557,7 +566,7 @@ export default function App() {
           </div>
           <iframe
             title="Mapa de San Gabán, Puno"
-            src="https://www.google.com/maps?q=San+Gaban,+Puno,+Peru&z=12&output=embed"
+            src="https://www.google.com/maps?q=Carr.+Interoce%C3%A1nica+102%2C+Lanlacuni+Bajo+21275%2C+Per%C3%BA&z=16&output=embed"
             loading="lazy"
           />
         </section>
@@ -581,7 +590,7 @@ export default function App() {
         <div>
           <b>Contacto</b>
           <span>{hotel.location}</span>
-          {hotel.phone && <span>{hotel.phone}</span>}
+          {hotel.phone && <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer">WhatsApp: {hotel.phone}</a>}
           {hotel.email && <span>{hotel.email}</span>}
         </div>
         <small>© {new Date().getFullYear()} Hotel Plaza San Gaban.</small>
